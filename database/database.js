@@ -35,8 +35,18 @@ const getPlayer = (player, callback) => {
   })
 }
 
+const updateBucket = (player, bucket, callback) => {
+  console.log(typeof player, player, typeof bucket, bucket)
+  Pokemon.findOneAndUpdate({"name": player}, {$set:{bucket:bucket}}, {new:true}, (err, data) => {
+    console.log(err, data)
+    if (err) throw err;
+    callback(data);
+  })
+}
+
 module.exports = {
   getPlayer,
   getPokemon,
   getStore,
+  updateBucket,
 }

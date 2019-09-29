@@ -8,16 +8,16 @@ const FishingModal = styled.div`
   z-index: 5;
   border: 1px solid black;
   position: absolute;
-  top: 71%;
+  top: 75%;
   left: 0;
   text-align: center;
+  background: white;
 `;
 
 const FishingCommand = styled.div`
   display: inline-block;
   width: 200px;
   height: 200px;
-  border: 1px solid blue;
   text-align: center;
   vertical-align: middle;
   line-height: 150px;
@@ -61,84 +61,118 @@ class Fishing extends React.Component {
       two: false,
       three: false,
       four: false,
-      keyboard: '',
       fail: false,
-      retry: false,
+      pokemon: null,
     };
+    this.targetKey = '';
     this.startFishing = this.startFishing.bind(this);
-    this.handleKeyboard = this.handleKeyboard.bind(this);
     this.displayFail = this.displayFail.bind(this);
     this.retry = this.retry.bind(this);
   }
 
   componentDidMount() {
-    const keys = ['d', 's', 'a', 'f', 'g']
-    let key = keys[Math.floor(Math.random() * 5)];
     this.setState({
-      keyboard: key
+      pokemon: this.props.nextPokemon,
     })
     this.startFishing();
   }
 
   startFishing() {
-    let counter = 1;
-    const recurse = () => {
-      if (counter === 1) {
+    const reels = Math.floor(Math.random() * 5) + 1;
+    let reelCounter = 0;
+    let readyCounter = 1;
+    const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    // const keys = ['a']
+    this.targetKey = keys[Math.floor(Math.random() * keys.length)];
+    let clicked = false;
+    const handleReel = () => {
+      clicked = false;
+      const handleKeyboard = (e) => {
+        clicked = true;
+        if (e.key === this.targetKey) {
+          if (reelCounter < reels) {
+            this.targetKey = keys[Math.floor(Math.random() * keys.length)];
+            readyCounter = 1;
+            window.removeEventListener('keydown', handleKeyboard);
+            ready();
+          } else {
+            window.removeEventListener('keydown', handleKeyboard);
+            this.props.fishingOff();
+            this.props.success(this.state.pokemon);
+            return;
+          }
+        } else {
+          window.removeEventListener('keydown', handleKeyboard);
+          reelCounter = reels;
+          this.displayFail();
+          return;
+        }
+      }
+      window.addEventListener('keydown', handleKeyboard);
+      const timeUp = () => {
+        if (!clicked) {
+          window.removeEventListener('keydown', handleKeyboard);
+          reelCounter = reels;
+          this.displayFail();
+        }
+      }
+      setTimeout(timeUp, 1000);
+    }
+    const ready = () => {
+      if (readyCounter === 1) {
         this.setState({
           one: true,
           two: false,
           three: false,
           four: false
         })
-        setTimeout(recurse, 1000)
-      } else if (counter === 2) {
+        readyCounter++;
+        setTimeout(ready, 1000)
+      } else if (readyCounter === 2) {
         this.setState({
           two: true
         })
-        setTimeout(recurse, 1000)
-      } else if (counter === 3) {
+        readyCounter++;
+        setTimeout(ready, 1000)
+      } else if (readyCounter === 3) {
         this.setState({
           three: true
         })
-        setTimeout(recurse, 1000)
-      } else if (counter === 4) {
-        window.addEventListener('keydown', this.handleKeyboard);
+        readyCounter++;
+        setTimeout(ready, 1000)
+      } else if (readyCounter === 4) {
         this.setState({
           one: false,
           two: false,
           three: false,
           four: true,
         })
-        setTimeout(this.displayFail, 1500);
+        reelCounter++;
+        handleReel();
+        return;
       }
-      counter++;
     }
-    recurse();
+    ready();
   }
 
   retry() {
     this.setState({
-      retry: true
-    })
-  }
-
-  reeledOnTime() {
-
+      one: true,
+      two: false,
+      three: false,
+      four: false,
+      fail: false,
+    }, this.startFishing)
   }
 
   displayFail() {
     this.setState({
+      one: false,
+      two: false,
+      three: false,
       four: false,
       fail: true
     })
-  }
-
-  handleKeyboard(e) {
-    if (e === this.state.keyboard) {
-      return true;
-    } else {
-      this.displayFail();
-    }
   }
 
   render() {
@@ -147,7 +181,7 @@ class Fishing extends React.Component {
         {this.state.one && <FishingCommand>.</FishingCommand>}
         {this.state.two && <FishingCommand>.</FishingCommand>}
         {this.state.three && <FishingCommand>.</FishingCommand>}
-        {this.state.four && <FishingCommand>{this.state.keyboard}</FishingCommand>}
+        {this.state.four && <FishingCommand>{this.targetKey}</FishingCommand>}
         {this.state.fail && <Fail>Aww.. It got away.</Fail>}
         {this.state.fail && <StartFishing onClick={this.retry}>Try Again?</StartFishing>}
         {this.state.fail && <ExitFishing onClick={this.props.fishingOff}>Stop Fishing</ExitFishing>}

@@ -3,7 +3,9 @@ import axios from 'axios';
 import Tile from './Board/Tile.jsx';
 import InfoBar from './InfoBar.jsx';
 import styled from 'styled-components';
-import Fishing from './Fishing.jsx';
+import Fishing from './Modals/Fishing.jsx';
+import Success from './Modals/Success.jsx';
+import Bucket from './Modals/Bucket.jsx';
 
 const StyledBoard = styled.div`
   display: flex;
@@ -29,10 +31,16 @@ class App extends React.Component {
       store: [],
       lakes: [],
       rods: [],
-      pokemon: [],
+      allPokemon: [],
+      success: false,
+      nextPokemon: null,
+      bucketDisplay: false,
     };
     this.fishingOff = this.fishingOff.bind(this);
     this.fishingOn = this.fishingOn.bind(this);
+    this.displaySuccess = this.displaySuccess.bind(this);
+    this.removeSuccess = this.removeSuccess.bind(this);
+    this.displayBucket = this.displayBucket.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +52,7 @@ class App extends React.Component {
         })
         axios.get(`/player/${this.state.player}`)
           .then((data) => {
-            console.log(data.data[0].lakes)
+            console.log(data.data[0])
             this.setState({
               lakes: data.data[0].lakes,
               rods: data.data[0].rods,
@@ -59,9 +67,11 @@ class App extends React.Component {
                     avail.push(data.data[i]);
                   }
                 }
+                let pokemon = avail[Math.floor(Math.random() * avail.length)];
                 this.setState({
-                  pokemon: data.data,
-                  available: avail
+                  allPokemon: data.data,
+                  available: avail,
+                  nextPokemon: pokemon
                 })
               })
           })
@@ -79,6 +89,35 @@ class App extends React.Component {
       fishing: false
     })
   }
+
+  displaySuccess(poke) {
+    let currentBucket = this.state.bucket;
+    currentBucket.push(poke);
+    console.log('currentbucket', currentBucket)
+    axios.put(`/player/${this.state.player}`, currentBucket)
+      .then((res) => {
+        console.log(res);
+      })
+    this.setState({
+      bucket: currentBucket,
+      success: true,
+    })
+  }
+
+  removeSuccess() {
+    let avail = this.state.available;
+    let pokemon = avail[Math.floor(Math.random() * avail.length)];
+    this.setState({
+      success: false,
+      nextPokemon: pokemon
+    })
+  }
+
+  displayBucket() {
+    this.setState({
+      bucketDisplay: !this.state.bucketDisplay
+    })
+  }
   
   render() {
     let tiles = [];
@@ -87,11 +126,13 @@ class App extends React.Component {
     }
     return(
       <div>
-        <InfoBar rods={this.state.rods} lakes={this.state.lakes} fishingOn={this.fishingOn} />
+        <InfoBar rods={this.state.rods} lakes={this.state.lakes} fishingOn={this.fishingOn} player={this.state.player} money={this.state.money} bucketDisplay={this.displayBucket} />
+        {this.state.bucketDisplay && <Bucket bucket={this.state.bucket} />}
         <StyledBoard>
           {tiles.map((tile, index) => (<Tile id={tile} key={index} />))}
         </StyledBoard>
-        {this.state.fishing && <Fishing avail={this.state.available} fishingOn={this.fishingOn} fishingOff={this.fishingOff}/>}
+        {this.state.fishing && <Fishing avail={this.state.available} fishingOn={this.fishingOn} fishingOff={this.fishingOff} success={this.displaySuccess} nextPokemon={this.state.nextPokemon} />}
+        {this.state.success && <Success nextPokemon={this.state.nextPokemon} success={this.displaySuccess} removeSuccess={this.removeSuccess} />}
       </div>
     )
   }

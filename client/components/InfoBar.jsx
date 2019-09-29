@@ -12,6 +12,15 @@ const StyledInfo = styled.div`
   margin: 0;
 `;
 
+const CurrentPlayer = styled.div`
+  display: flex;
+  height: 50px;
+  width: 100px;
+  border: 1px solid black;
+  position: absolute;
+  top: 1.75%;
+  left: 5%;
+`;
 const Bucket = styled.button`
   display: flex;
   height: 70px;
@@ -19,7 +28,7 @@ const Bucket = styled.button`
   border: 1px solid black;
   position: absolute;
   top: 0.6%;
-  left: 5%;
+  left: 20%;
 `;
 
 const Rods = styled.select`
@@ -29,7 +38,7 @@ const Rods = styled.select`
   border: 1px solid black;
   position: absolute;
   top: 0.6%;
-  left: 15%;
+  left: 60%;
 `;
 
 const Lakes = styled.select`
@@ -39,7 +48,7 @@ const Lakes = styled.select`
   border: 1px solid black;
   position: absolute;
   top: 0.6%;
-  left: 24%;
+  left: 68%;
 `;
 
 const Fishermon = styled.button`
@@ -59,7 +68,7 @@ const Money = styled.div`
   border: 1px solid black;
   position: absolute;
   top: 1.75%;
-  left: 75%;
+  left: 79%;
 `;
 const Store = styled.button`
   display: flex;
@@ -81,7 +90,8 @@ class InfoBox extends React.Component {
   render() {
     return(
       <StyledInfo>
-        <Bucket>Bucket</Bucket>
+        <CurrentPlayer>{this.props.player}</CurrentPlayer>
+        <Bucket onClick={this.props.bucketDisplay}>Bucket</Bucket>
         <Rods>Rods
           {this.props.rods.map((rod, index) => <option key={index}>{rod}</option>)}
         </Rods>
@@ -89,7 +99,7 @@ class InfoBox extends React.Component {
           {this.props.lakes.map((lake, index) => <option key={index}>{lake}</option>)}
         </Lakes>
         <Fishermon onClick={this.props.fishingOn} >Fish!</Fishermon>
-        <Money />
+        <Money>{JSON.stringify(this.props.money)}</Money>
         <Store>Store</Store>
       </StyledInfo>
     )
