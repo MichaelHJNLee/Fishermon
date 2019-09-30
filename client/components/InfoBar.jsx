@@ -91,16 +91,16 @@ class InfoBox extends React.Component {
     return(
       <StyledInfo>
         <CurrentPlayer>{this.props.player}</CurrentPlayer>
-        <Bucket onClick={this.props.bucketDisplay}>Bucket</Bucket>
+        <Bucket onClick={this.props.displayBucket}>Bucket</Bucket>
         <Rods>Rods
           {this.props.rods.map((rod, index) => <option key={index}>{rod}</option>)}
         </Rods>
-        <Lakes>Lakes
+        <Lakes onChange={(e) => {this.props.changeLake(e.target.value)}}>Lakes
           {this.props.lakes.map((lake, index) => <option key={index}>{lake}</option>)}
         </Lakes>
         <Fishermon onClick={this.props.fishingOn} >Fish!</Fishermon>
         <Money>{JSON.stringify(this.props.money)}</Money>
-        <Store>Store</Store>
+        <Store onClick={this.props.displayStore} >Store</Store>
       </StyledInfo>
     )
   }

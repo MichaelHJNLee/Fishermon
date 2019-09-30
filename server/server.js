@@ -31,13 +31,35 @@ app.get('/player/:id', (req, res) => {
   })
 })
 
-app.put('/player/:id', (req, res) => {
-  const id = req.params.id;
-  console.log(req.body)
-  pokemon.updateBucket(id, req.body, (data) => {
+app.get('/players', (req, res) => {
+  pokemon.getAllPlayers((data) => {
     res.send(data);
   })
 })
+
+app.put('/player/catch/:id', (req, res) => {
+  const id = req.params.id;
+  pokemon.addToBucket(id, req.body, (data) => {
+    res.send(data);
+  })
+})
+
+app.put('/player/sell/:id', (req, res) => {
+  const id = req.params.id;
+  pokemon.sellFromBucket(id, req.body.bucket, req.body.cost, (data) => {
+    res.send(data)
+  });
+})
+
+app.put('/player/buy/:rodLake/:id', (req, res) => {
+  const id = req.params.id;
+  const rodLake = req.params.rodLake;
+  pokemon.buyItem(id, rodLake, req.body.array, req.body.cost, (data) => {
+    res.send(data);
+  })
+})
+
+
 
 
 app.listen(port, () => { console.log(`Listening on port ${port}`); });

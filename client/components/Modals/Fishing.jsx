@@ -78,11 +78,11 @@ class Fishing extends React.Component {
   }
 
   startFishing() {
-    const reels = Math.floor(Math.random() * 5) + 1;
+    const reels = Math.floor(Math.random() * 1) + 1;
     let reelCounter = 0;
     let readyCounter = 1;
-    const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-    // const keys = ['a']
+    // const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    const keys = ['a']
     this.targetKey = keys[Math.floor(Math.random() * keys.length)];
     let clicked = false;
     const handleReel = () => {

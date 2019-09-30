@@ -1,14 +1,25 @@
 const { MongoClient } = require('mongodb');
 const axios = require('axios');
 const url = 'mongodb://localhost:27017/fishermon';
-
+// id: Number,
+// name: String,
+// type: [String],
+// cost: Number,
+// rarity: String,
+// bucket: [{type: [String], id: Number, name: String, cost: Number, rarity: String, pokemon: Boolean}],
+// rods: [String],
+// lakes: [String],
+// player: Boolean,
+// money: Number,
+// store: Boolean
+// pokemon: Boolean
 const getPokemon = (callback) => {
   let firstGen = [];
-  let counter = 100;
+  let counter = 152;
   const costs = [10, 20, 30, 40, 50];
   const rare = ['common', 'uncommon', 'rare', 'super rare', 'ultra rare'];
   const apiCall = () => {  
-    if (counter <= 151) {
+    if (counter <= 251) {
       axios.get(`https://pokeapi.co/api/v2/pokemon/${counter}`)
         .then((data) => {
         const id = counter;
@@ -22,7 +33,7 @@ const getPokemon = (callback) => {
         const rarity = rare[random];
         
         firstGen.push({
-          id: id, name: name, type: type, cost: cost, rarity: rarity, pokemon: true
+          id: id, name: name, type: type, cost: cost, rarity: rarity, bucket: [], rods: [], lakes: [], player: false, money: 0, store: false, pokemon: true
         });
         counter++;
         console.log(counter)

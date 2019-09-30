@@ -81,11 +81,11 @@ class Success extends React.Component {
   render() {
     return (
       <StyledSuccess>
-        <Exit onClick={this.props.removeSuccess}>Exit</Exit>
+        <Exit onClick={this.props.removeSuccess}>X</Exit>
         <Congratulations>Congratulations!</Congratulations>
-        <YouCaught>You caught a {name}!</YouCaught>
+        <YouCaught>You caught a {this.props.nextPokemon.name[0].toUpperCase() + this.props.nextPokemon.name.slice(1)}!</YouCaught>
         <Sprite><img src={`/sprites/${this.props.nextPokemon.id}.png`} style={{"display":"block", "height": "250px", "width": "250px", "margin": "auto"}}/></Sprite>
-        <Rarity>{this.props.nextPokemon.rarity}</Rarity>
+        <Rarity>{this.props.nextPokemon.rarity[0].toUpperCase() + this.props.nextPokemon.rarity.slice(1)}</Rarity>
         <Cost>{this.props.nextPokemon.cost}</Cost>
       </StyledSuccess>
     )
