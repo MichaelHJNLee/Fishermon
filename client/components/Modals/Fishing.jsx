@@ -22,6 +22,9 @@ const FishingCommand = styled.div`
   vertical-align: middle;
   line-height: 150px;
   font-size: 100px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const Fail = styled.div`
@@ -78,11 +81,11 @@ class Fishing extends React.Component {
   }
 
   startFishing() {
-    const reels = Math.floor(Math.random() * 1) + 1;
+    const reels = Math.floor(Math.random() * 5) + 1;
     let reelCounter = 0;
     let readyCounter = 1;
-    // const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-    const keys = ['a']
+    const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    // const keys = ['a']
     this.targetKey = keys[Math.floor(Math.random() * keys.length)];
     let clicked = false;
     const handleReel = () => {
@@ -116,7 +119,7 @@ class Fishing extends React.Component {
           this.displayFail();
         }
       }
-      setTimeout(timeUp, 1000);
+      setTimeout(timeUp, 700);
     }
     const ready = () => {
       if (readyCounter === 1) {
@@ -127,19 +130,19 @@ class Fishing extends React.Component {
           four: false
         })
         readyCounter++;
-        setTimeout(ready, 1000)
+        setTimeout(ready, 800)
       } else if (readyCounter === 2) {
         this.setState({
           two: true
         })
         readyCounter++;
-        setTimeout(ready, 1000)
+        setTimeout(ready, 800)
       } else if (readyCounter === 3) {
         this.setState({
           three: true
         })
         readyCounter++;
-        setTimeout(ready, 1000)
+        setTimeout(ready, 800)
       } else if (readyCounter === 4) {
         this.setState({
           one: false,

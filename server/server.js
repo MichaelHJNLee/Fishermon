@@ -37,6 +37,13 @@ app.get('/players', (req, res) => {
   })
 })
 
+app.get('/player/new/:id', (req, res) => {
+  const id = req.params.id;
+  pokemon.newPlayer(id, (data) => {
+    res.send(data)
+  })
+})
+
 app.put('/player/catch/:id', (req, res) => {
   const id = req.params.id;
   pokemon.addToBucket(id, req.body, (data) => {

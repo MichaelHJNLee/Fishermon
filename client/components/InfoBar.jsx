@@ -10,17 +10,31 @@ const StyledInfo = styled.div`
   box-sizing: border-box;
   border: 1px solid black;
   margin: 0;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const CurrentPlayer = styled.div`
   display: flex;
-  height: 50px;
+  height: 25px;
   width: 100px;
   border: 1px solid black;
   position: absolute;
   top: 1.75%;
-  left: 5%;
+  left: 3%;
 `;
+
+const LogOut = styled.div`
+  display: flex;
+  height: 25px;
+  width: 100px;
+  border: 1px solid black;
+  position: absolute;
+  top: 6.5%;
+  left: 3%;
+`;
+
 const Bucket = styled.button`
   display: flex;
   height: 70px;
@@ -80,6 +94,20 @@ const Store = styled.button`
   left: 87%;
 `;
 
+const Help = styled.button`
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  position: absolute;
+  top: 2%;
+  left: 95%;
+  border-radius: 30px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+`;
+
 class InfoBox extends React.Component {
   constructor(props) {
     super(props);
@@ -91,8 +119,9 @@ class InfoBox extends React.Component {
     return(
       <StyledInfo>
         <CurrentPlayer>{this.props.player}</CurrentPlayer>
+        <LogOut onClick={this.props.logout}>Log Out</LogOut>
         <Bucket onClick={this.props.displayBucket}>Bucket</Bucket>
-        <Rods>Rods
+        <Rods onChange={(e) => {this.props.changeRod(e.target.value)}}>Rods
           {this.props.rods.map((rod, index) => <option key={index}>{rod}</option>)}
         </Rods>
         <Lakes onChange={(e) => {this.props.changeLake(e.target.value)}}>Lakes
@@ -101,6 +130,7 @@ class InfoBox extends React.Component {
         <Fishermon onClick={this.props.fishingOn} >Fish!</Fishermon>
         <Money>{JSON.stringify(this.props.money)}</Money>
         <Store onClick={this.props.displayStore} >Store</Store>
+        <Help onClick={this.props.help}>?</Help>
       </StyledInfo>
     )
   }

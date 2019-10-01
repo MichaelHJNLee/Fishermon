@@ -46,6 +46,13 @@ const getAllPlayers = (callback) => {
   })
 }
 
+const newPlayer = (player, callback) => {
+  Pokemon.findOneAndUpdate({"name": player, "player": true}, {id: 0, name: player, type: [], cost: 0, rarity: 0, bucket: [], rods: ['Old Rod'], lakes: ['Water Well'], player: true, money: 0, store: false}, {upsert: true}, (err, data) => {
+    if (err) throw err;
+    callback(data);
+  })
+}
+
 const addToBucket = (player, bucket, callback) => {
   Pokemon.findOneAndUpdate({"name": player, "player": true}, {bucket:bucket}, {new:true}, (err, data) => {
     if (err) throw err;
@@ -77,6 +84,7 @@ const buyItem = (player, rodLake, array, money, callback) => {
 module.exports = {
   getPlayer,
   getAllPlayers,
+  newPlayer,
   getPokemon,
   getStore,
   addToBucket,

@@ -15,11 +15,9 @@ const url = 'mongodb://localhost:27017/fishermon';
 // pokemon: Boolean
 const getPokemon = (callback) => {
   let firstGen = [];
-  let counter = 152;
-  const costs = [10, 20, 30, 40, 50];
-  const rare = ['common', 'uncommon', 'rare', 'super rare', 'ultra rare'];
+  let counter = 352;
   const apiCall = () => {  
-    if (counter <= 251) {
+    if (counter <= 386) {
       axios.get(`https://pokeapi.co/api/v2/pokemon/${counter}`)
         .then((data) => {
         const id = counter;
@@ -28,9 +26,24 @@ const getPokemon = (callback) => {
         for (let j = 0; j < data.data.types.length; j++) {
           type.push(data.data.types[j].type.name);
         }
-        const random = Math.floor(Math.random() * 5);
-        const cost = costs[random];
-        const rarity = rare[random];
+        let cost;
+        let rarity;
+        if (data.data.base_experience <= 80) {
+          cost = 10
+          rarity = 'common';
+        } else if (data.data.base_experience > 80 & data.data.base_experience <= 140) {
+          cost = 20;
+          rarity = 'uncommon';
+        } else if (data.data.base_experience > 140 & data.data.base_experience <= 200) {
+          cost = 30;
+          rarity = 'rare';
+        } else if (data.data.base_experience > 200 & data.data.base_experience <= 250) {
+          cost = 40;
+          rarity = 'super rare';
+        } else {
+          cost = 50;
+          rarity = 'ultra rare';
+        }
         
         firstGen.push({
           id: id, name: name, type: type, cost: cost, rarity: rarity, bucket: [], rods: [], lakes: [], player: false, money: 0, store: false, pokemon: true
@@ -70,22 +83,3 @@ MongoClient.connect(url, (err, client) => {
     })})
   }
 });
-// axios.get(`https://pokeapi.co/api/v2/pokemon/${89}`)
-//   .then((data) => {
-//     console.log(data.data.name, data.data.types)
-//   })
-// MongoClient.connect(url, (err, client) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log('Connected to MongoDB');
-//     const db = client.db('fishermon');
-//     const collection = db.collection('pokemon');
-//     collection.insertMany([{id: 1, name: 'Bulbasaur', type: ['grass', 'poison']}, {id: 1, name: 'Bulbasaur', type: ['grass', 'poison']}], (err, result) => {
-//       if (err) {
-//         console.log('err', err);
-//       }
-//       console.log(result)
-//     });
-//   }
-// });

@@ -18,6 +18,9 @@ const Congratulations = styled.div`
   text-align: center;
   font-size: 40px;
   margin: 0px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const YouCaught = styled.div`
@@ -26,6 +29,9 @@ const YouCaught = styled.div`
   text-align: center;
   font-size: 20px;
   margin: 0px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const Sprite = styled.div`
@@ -41,6 +47,9 @@ const Rarity = styled.div`
   text-align: center;
   font-size: 15x;
   margin: 0px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const Cost = styled.div`
@@ -49,6 +58,9 @@ const Cost = styled.div`
   text-align: center;
   font-size: 15x;
   margin: 0px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const Exit = styled.div`
@@ -86,7 +98,7 @@ class Success extends React.Component {
         <YouCaught>You caught a {this.props.nextPokemon.name[0].toUpperCase() + this.props.nextPokemon.name.slice(1)}!</YouCaught>
         <Sprite><img src={`/sprites/${this.props.nextPokemon.id}.png`} style={{"display":"block", "height": "250px", "width": "250px", "margin": "auto"}}/></Sprite>
         <Rarity>{this.props.nextPokemon.rarity[0].toUpperCase() + this.props.nextPokemon.rarity.slice(1)}</Rarity>
-        <Cost>{this.props.nextPokemon.cost}</Cost>
+        <Cost>{this.props.nextPokemon.cost} Coins</Cost>
       </StyledSuccess>
     )
   }
