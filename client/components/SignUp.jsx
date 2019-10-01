@@ -4,18 +4,26 @@ import styled from 'styled-components';
 const StyledSignUp = styled.div`
   height: 200px;
   width: 500px;
-  border: 1px solid black;
   margin: 20px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const Input = styled.input`
   height: 20px;
   width: 200px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const Submit = styled.button`
   height: 25px;
   width: 100px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const SignUp = (props) => {

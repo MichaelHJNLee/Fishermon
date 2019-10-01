@@ -55,6 +55,7 @@ class App extends React.Component {
       rare: 90,
       superRare: 98,
       shiny: 0,
+      displayShiny: false,
     };
     this.fishingOff = this.fishingOff.bind(this);
     this.fishingOn = this.fishingOn.bind(this);
@@ -125,7 +126,7 @@ class App extends React.Component {
                   allPokemon: data.data,
                   available: avail,
                   nextPokemon: pokemon,
-                  shiny: shiny
+                  shiny: shiny,
                 })
               })
           })
@@ -145,8 +146,12 @@ class App extends React.Component {
   }
 
   displaySuccess(poke) {
+    let id = poke.id;
     let currentBucket = this.state.bucket;
-    currentBucket.push(poke.id);
+    if (this.state.shiny === 99) {
+      id = id * 1000;
+    }
+    currentBucket.push(id);
     axios.put(`/player/catch/${this.state.player}`, currentBucket)
       .then((res) => {
       })
@@ -185,7 +190,7 @@ class App extends React.Component {
     this.setState({
       success: false,
       nextPokemon: pokemon,
-      shiny: shiny
+      shiny: shiny,
     })
   }
 
@@ -204,10 +209,15 @@ class App extends React.Component {
 
   displayPokemonInfo(e) {
     let pokemonId = parseInt(e.target.src.split('/')[4].slice(0, e.target.src.split('/')[4].length - 4));
+    let shiny = false;
+    if (e.target.id === '1') {
+      shiny = true;
+    }
     let selected = this.state.allPokemon[pokemonId - 1];
     this.setState({
       pokemonDisplay: true,
-      selectedPokemon: selected
+      selectedPokemon: selected,
+      displayShiny: shiny
     })
   }
 
@@ -358,7 +368,12 @@ class App extends React.Component {
 
   handleLogout() {
     this.setState({
-      login: false
+      login: false,
+      bucketDisplay: false,
+      storeDisplay: false,
+      pokemonDisplay: false,
+      success: false,
+      storeItemDisplay: false,
     })
   }
 
@@ -443,7 +458,7 @@ class App extends React.Component {
         {this.state.help && <Help help={this.toggleHelp}/>}
         {this.state.storeItemDisplay && <StoreItemInfo hide={this.hideStoreItemInfo} selected={this.state.selectedItem} buy={this.handleBuy} />}
         {this.state.storeDisplay && <Store store={this.state.store} display={this.displayStoreItemInfo} />}
-        {this.state.pokemonDisplay && <PokemonInfo selectedPokemon={this.state.selectedPokemon} sell={this.handleSell} hide={this.hidePokemonInfo} />}
+        {this.state.pokemonDisplay && <PokemonInfo displayShiny={this.state.displayShiny} selectedPokemon={this.state.selectedPokemon} sell={this.handleSell} hide={this.hidePokemonInfo} />}
         <StyledBoard>
           {tiles.map((tile, index) => (<Tile id={tile} key={index} fishing={this.state.fishing} lake={this.state.currentLake} />))}
         </StyledBoard>

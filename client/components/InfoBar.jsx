@@ -16,82 +16,111 @@ const StyledInfo = styled.div`
 `;
 
 const CurrentPlayer = styled.div`
-  display: flex;
+  display: inline-block;
   height: 25px;
   width: 100px;
   border: 1px solid black;
   position: absolute;
   top: 1.75%;
   left: 3%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px;
 `;
 
 const LogOut = styled.div`
-  display: flex;
+  display: inline-block;;
   height: 25px;
   width: 100px;
   border: 1px solid black;
   position: absolute;
   top: 6.5%;
   left: 3%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px;
 `;
 
 const Bucket = styled.button`
-  display: flex;
+  display: inline-block;
   height: 70px;
   width: 120px;
   border: 1px solid black;
   position: absolute;
   top: 0.6%;
   left: 20%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px;
+  font-size: 20px;
 `;
 
 const Rods = styled.select`
-  display: flex;
+  display: inline-block;
   height: 70px;
   width: 100px;
   border: 1px solid black;
   position: absolute;
   top: 0.6%;
   left: 60%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px;
+  font-size: 15px;
 `;
 
 const Lakes = styled.select`
-  display: flex;
+  display: inline-block;
   height: 70px;
   width: 100px;
   border: 1px solid black;
   position: absolute;
   top: 0.6%;
   left: 68%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px;
+  font-size: 15px;
 `;
 
 const Fishermon = styled.button`
-  display: flex;
+  display: inline-block;
   height: 70px;
   width: 170px;
   border: 1px solid black;
   position: absolute;
   top: 0.6%;
   left: 44%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px;
+  font-size: 20px;
 `;
 
 const Money = styled.div`
-  display: flex;
+  display: inline-block;
   height: 50px;
-  width: 100px;
+  width: 110px;
   border: 1px solid black;
   position: absolute;
   top: 1.75%;
-  left: 79%;
+  left: 78%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
 `;
 const Store = styled.button`
-  display: flex;
+  display: inline-block;
   height: 70px;
   width: 100px;
   border: 1px solid black;
   position: absolute;
   top: 0.6%;
   left: 87%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px;
+  font-size: 20px;
 `;
 
 const Help = styled.button`
@@ -128,7 +157,7 @@ class InfoBox extends React.Component {
           {this.props.lakes.map((lake, index) => <option key={index}>{lake}</option>)}
         </Lakes>
         <Fishermon onClick={this.props.fishingOn} >Fish!</Fishermon>
-        <Money>{JSON.stringify(this.props.money)}</Money>
+        <Money>{JSON.stringify(this.props.money)} coins</Money>
         <Store onClick={this.props.displayStore} >Store</Store>
         <Help onClick={this.props.help}>?</Help>
       </StyledInfo>

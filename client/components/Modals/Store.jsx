@@ -8,7 +8,6 @@ const StyledStore = styled.div`
   height: auto;
   width: 210px;
   background: white;
-  border: 1px solid orange;
   left: 79.5%;
   flex-flow: row wrap;
 `;

@@ -91,12 +91,18 @@ class Success extends React.Component {
   }
 
   render() {
+    let color = 'sprites';
+    let text = ' ';
+    if (this.props.shiny === 99) {
+      color = 'shiny';
+      text = ' shiny ';
+    }
     return (
       <StyledSuccess>
         <Exit onClick={this.props.removeSuccess}>X</Exit>
         <Congratulations>Congratulations!</Congratulations>
-        <YouCaught>You caught a {this.props.nextPokemon.name[0].toUpperCase() + this.props.nextPokemon.name.slice(1)}!</YouCaught>
-        <Sprite><img src={`/sprites/${this.props.nextPokemon.id}.png`} style={{"display":"block", "height": "250px", "width": "250px", "margin": "auto"}}/></Sprite>
+        <YouCaught>You caught a{text}{this.props.nextPokemon.name[0].toUpperCase() + this.props.nextPokemon.name.slice(1)}!</YouCaught>
+        <Sprite><img src={`/${color}/${this.props.nextPokemon.id}.png`} style={{"display":"block", "height": "250px", "width": "250px", "margin": "auto"}}/></Sprite>
         <Rarity>{this.props.nextPokemon.rarity[0].toUpperCase() + this.props.nextPokemon.rarity.slice(1)}</Rarity>
         <Cost>{this.props.nextPokemon.cost} Coins</Cost>
       </StyledSuccess>

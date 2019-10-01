@@ -184,7 +184,7 @@ class Fishing extends React.Component {
         {this.state.one && <FishingCommand>.</FishingCommand>}
         {this.state.two && <FishingCommand>.</FishingCommand>}
         {this.state.three && <FishingCommand>.</FishingCommand>}
-        {this.state.four && <FishingCommand>{this.targetKey}</FishingCommand>}
+        {this.state.four && <FishingCommand>{this.targetKey}!</FishingCommand>}
         {this.state.fail && <Fail>Aww.. It got away.</Fail>}
         {this.state.fail && <StartFishing onClick={this.retry}>Try Again?</StartFishing>}
         {this.state.fail && <ExitFishing onClick={this.props.fishingOff}>Stop Fishing</ExitFishing>}

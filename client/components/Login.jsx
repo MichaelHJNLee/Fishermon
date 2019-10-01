@@ -61,7 +61,7 @@ class Login extends React.Component {
     return(
       <div>
         <center><StyledHeader>Fishermon</StyledHeader></center>
-        <center>Fishers:</center>
+        <center style={{'font-smooth': 'never', '-webkit-font-smoothing': 'none', 'font-family': "'pokemon-font', monospace"}}>Fishers:</center>
         <br/>
         <center>
           <UserList>

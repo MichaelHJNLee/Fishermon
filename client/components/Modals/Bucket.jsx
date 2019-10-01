@@ -9,9 +9,8 @@ const StyledBucket = styled.div`
   height: auto;
   width: 280px;
   background: white;
-  border: 1px solid orange;
   left: 15%;
-  top: 11%;
+  top: 10.5%;
   flex-flow: row wrap;
 `;
 
@@ -24,7 +23,17 @@ const BucketItem = styled.div`
 const Bucket = (props) => {
   return(
     <StyledBucket>
-      {props.bucket.map((item, index) => <BucketItem key={index}><img src={`/sprites/${item}.png`} style={{"height": "100%", "width": "100%"}} onClick={(e) => {props.displayPokemonInfo(e)}} /></BucketItem>)}
+      {props.bucket.map((item, index) => {
+        let color = 'sprites';
+        let id = item;
+        let shiny = 0;
+        if (id >= 1000) {
+          color = 'shiny';
+          id = id / 1000;
+          shiny = 1;
+        }
+        return (<BucketItem key={index}><img id={shiny} src={`/${color}/${id}.png`} style={{"height": "100%", "width": "100%"}} onClick={(e) => {props.displayPokemonInfo(e)}} /></BucketItem>)
+      })}
     </StyledBucket>
   )
 }

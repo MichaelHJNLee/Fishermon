@@ -8,9 +8,11 @@ const Info = styled.div`
   height: 150px;
   width: 280px;
   background: white;
-  border: 1px solid pink;
   left: 60%;
   top: 12%;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
 `;
 
 const ItemName = styled.div`
@@ -20,15 +22,6 @@ const ItemName = styled.div`
   width: auto;
   left: 37%;
   top: 12%;
-`;
-
-const Rarity = styled.div`
-  display: flex;
-  position: absolute;
-  height: 20px;
-  width: auto;
-  left: 62%;
-  top: 10%;
 `;
 
 const ItemSprite = styled.img`
@@ -46,12 +39,13 @@ const BuyQuery = styled.div`
   position: absolute;
   left: 10%;
   top: 30%;
+  font-size: 13px;
 `;
 
 const Buy = styled.button`
   height: 35px;
   width: 90px;
-  border: 1px solid purple;
+  border: 1px solid black;
   position: absolute;
   left: 10%;
   top: 65%;
