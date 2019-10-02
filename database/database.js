@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://ec2-13-52-177-221.us-west-1.compute.amazonaws.com:27017/fishermon', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/fishermon', { useNewUrlParser: true });
 
 const pokemonSchema = mongoose.Schema({
   id: Number,

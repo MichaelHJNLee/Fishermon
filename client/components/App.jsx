@@ -12,6 +12,7 @@ import StoreItemInfo from './Modals/StoreItemInfo.jsx';
 import Login from './Login.jsx';
 import SignUp from './SignUp.jsx';
 import Help from './Modals/Help.jsx';
+import { thisExpression } from '@babel/types';
 
 const StyledBoard = styled.div`
   display: flex;
@@ -230,8 +231,12 @@ class App extends React.Component {
   handleSell(poke) {
     let currentBucket = this.state.bucket;
     let spliceIndex;
+    let id = poke.id;
+    if (this.state.displayShiny === true) {
+      id = id * 1000;
+    }
     for (let i = 0; i < currentBucket.length; i++) {
-      if (currentBucket[i] === poke.id) {
+      if (currentBucket[i] === id) {
         spliceIndex = i;
         break;
       }
