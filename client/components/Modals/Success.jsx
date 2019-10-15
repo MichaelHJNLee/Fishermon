@@ -16,22 +16,22 @@ const Congratulations = styled.div`
   height: 100px;
   width: 500px;
   text-align: center;
-  font-size: 40px;
-  margin: 0px;
+  font-size: 20px;
+  margin: 10px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const YouCaught = styled.div`
   height: 100px;
   width: 500px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   margin: 0px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Sprite = styled.div`
@@ -49,7 +49,7 @@ const Rarity = styled.div`
   margin: 0px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Cost = styled.div`
@@ -60,7 +60,7 @@ const Cost = styled.div`
   margin: 0px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Exit = styled.div`

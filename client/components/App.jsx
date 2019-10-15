@@ -12,7 +12,6 @@ import StoreItemInfo from './Modals/StoreItemInfo.jsx';
 import Login from './Login.jsx';
 import SignUp from './SignUp.jsx';
 import Help from './Modals/Help.jsx';
-import { thisExpression } from '@babel/types';
 
 const StyledBoard = styled.div`
   display: flex;
@@ -22,6 +21,7 @@ const StyledBoard = styled.div`
   align-self: center;
   box-sizing: border-box;
   margin: auto;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 class App extends React.Component {
@@ -51,10 +51,11 @@ class App extends React.Component {
       login: false,
       help: false,
       users: [],
-      common: 50,
-      uncommon: 75,
-      rare: 90,
-      superRare: 98,
+      usersDisplayed: [],
+      common: 60,
+      uncommon: 95,
+      rare: 100,
+      superRare: 100,
       shiny: 0,
       displayShiny: false,
     };
@@ -77,6 +78,7 @@ class App extends React.Component {
     this.handleNewPlayer = this.handleNewPlayer.bind(this);
     this.handleRodChange = this.handleRodChange.bind(this);
     this.toggleHelp = this.toggleHelp.bind(this);
+    this.searchUser = this.searchUser.bind(this);
   }
 
   componentDidMount() {
@@ -88,7 +90,8 @@ class App extends React.Component {
         axios.get('/players')
           .then((data) => {
             this.setState({
-              users: data.data
+              users: data.data,
+              usersDisplayed: data.data
             })
             axios.get(`/pokemon`)
               .then((data) => {
@@ -103,11 +106,11 @@ class App extends React.Component {
                 let rarity;
                 if (random >= 1 && random <= this.state.common) {
                   rarity = 'common';
-                } else if (random > 50 && random <= this.state.uncommon) {
+                } else if (random > this.state.common && random <= this.state.uncommon) {
                   rarity = 'uncommon';
-                } else if (random > 75 && random <= this.state.rare) {
+                } else if (random > this.state.uncommon && random <= this.state.rare) {
                   rarity = 'rare';
-                } else if (random > 90 && random <= this.state.superRare) {
+                } else if (random > this.state.rare && random <= this.state.superRare) {
                   rarity = 'super rare';
                 } else {
                   rarity = 'ultra rare';
@@ -122,7 +125,7 @@ class App extends React.Component {
                   rare.push(avail[Math.floor(Math.random() * avail.length)]);
                 }
                 let pokemon = rare[Math.floor(Math.random() * rare.length)];
-                let shiny = Math.floor(Math.random() * 100) + 1;
+                let shiny = Math.floor(Math.random() * 500) + 1;
                 this.setState({
                   allPokemon: data.data,
                   available: avail,
@@ -155,11 +158,11 @@ class App extends React.Component {
     currentBucket.push(id);
     axios.put(`/player/catch/${this.state.player}`, currentBucket)
       .then((res) => {
+        this.setState({
+          bucket: currentBucket,
+          success: true,
+        })
       })
-    this.setState({
-      bucket: currentBucket,
-      success: true,
-    })
   }
 
   removeSuccess() {
@@ -168,11 +171,11 @@ class App extends React.Component {
     let rarity;
     if (random >= 1 && random <= this.state.common) {
       rarity = 'common';
-    } else if (random > 50 && random <= this.state.uncommon) {
+    } else if (random > this.state.common && random <= this.state.uncommon) {
       rarity = 'uncommon';
-    } else if (random > 75 && random <= this.state.rare) {
+    } else if (random > this.state.uncommon && random <= this.state.rare) {
       rarity = 'rare';
-    } else if (random > 90 && random <= this.state.superRare) {
+    } else if (random > this.state.rare && random <= this.state.superRare) {
       rarity = 'super rare';
     } else {
       rarity = 'ultra rare';
@@ -187,7 +190,7 @@ class App extends React.Component {
       rare.push(avail[Math.floor(Math.random() * avail.length)]);
     }
     let pokemon = rare[Math.floor(Math.random() * rare.length)];
-    let shiny = Math.floor(Math.random() * 100) + 1;
+    let shiny = Math.floor(Math.random() * 500) + 1;
     this.setState({
       success: false,
       nextPokemon: pokemon,
@@ -324,11 +327,11 @@ class App extends React.Component {
     let rarity;
     if (random >= 1 && random <= this.state.common) {
       rarity = 'common';
-    } else if (random > 50 && random <= this.state.uncommon) {
+    } else if (random > this.state.common && random <= this.state.uncommon) {
       rarity = 'uncommon';
-    } else if (random > 75 && random <= this.state.rare) {
+    } else if (random > this.state.uncommon && random <= this.state.rare) {
       rarity = 'rare';
-    } else if (random > 90 && random <= this.state.superRare) {
+    } else if (random > this.state.rare && random <= this.state.superRare) {
       rarity = 'super rare';
     } else {
       rarity = 'ultra rare';
@@ -343,7 +346,7 @@ class App extends React.Component {
       rare.push(avail[Math.floor(Math.random() * avail.length)]);
     }
     let pokemon = rare[Math.floor(Math.random() * rare.length)];
-    let shiny = Math.floor(Math.random() * 100) + 1;
+    let shiny = Math.floor(Math.random() * 500) + 1;
     this.setState({
       available: avail,
       nextPokemon: pokemon,
@@ -395,10 +398,15 @@ class App extends React.Component {
     }
     axios.get(`/player/new/${name}`)
       .then((data) => {
+        if (data.data === 'exists') {
+          alert("This fisher already exists");
+          return;
+        }
         axios.get('/players')
           .then((data) => {
             this.setState({
               users: data.data,
+              usersDisplayed: data.data,
               signup: false
             })
           })
@@ -409,34 +417,34 @@ class App extends React.Component {
     if (rod === 'Old Rod') {
       this.setState({
         rod: 'Old Rod',
-        common: 50,
-        uncommon: 75,
-        rare: 90,
-        superRare: 98
+        common: 60,
+        uncommon: 95,
+        rare: 100,
+        superRare: 100,
       })
     } else if (rod === 'Good Rod') {
       this.setState({
         rod: 'Good Rod',
-        common: 35,
-        uncommon: 65,
-        rare: 85,
-        superRare: 95
+        common: 50,
+        uncommon: 80,
+        rare: 95,
+        superRare: 100
       })
     } else if (rod === 'Super Rod') {
       this.setState({
         rod: 'Super Rod',
-        common: 20,
-        uncommon: 45,
-        rare: 80,
-        superRare: 95
+        common: 30,
+        uncommon: 55,
+        rare: 90,
+        superRare: 97
       })
     } else if (rod === 'Ultra Rod') {
       this.setState({
         rod: 'Ultra Rod',
-        common: 10,
-        uncommon: 30,
-        rare: 65,
-        superRare: 90
+        common: 15,
+        uncommon: 40,
+        rare: 80,
+        superRare: 95
       })
     }
   }
@@ -447,6 +455,18 @@ class App extends React.Component {
     })
   }
 
+  searchUser(e) {
+    let searched = [];
+    for (let i = 0; i < this.state.users.length; i++) {
+      if (this.state.users[i].name.includes(e)) {
+        searched.push(this.state.users[i]);
+      }
+    }
+    this.setState({
+      usersDisplayed: searched
+    })
+  }
+
   render() {
     let tiles = [];
     for (let i = 1; i <= 336; i++) {
@@ -454,7 +474,7 @@ class App extends React.Component {
     }
     return(
       <div>
-        {!this.state.login && <Login users={this.state.users} login={this.handleLogin} signup={this.displaySignUp} />}
+        {!this.state.login && <Login users={this.state.usersDisplayed} login={this.handleLogin} signup={this.displaySignUp} search={this.searchUser}/>}
         {this.state.signup && <SignUp submit={this.handleNewPlayer} />}
         {this.state.login && 
         <div>

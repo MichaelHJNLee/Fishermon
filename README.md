@@ -2,21 +2,10 @@
 
 ## Fishermon is a game where you can fish for pokemon.
 
-Challenges:
-  - Create board + lake x
-  - Create fishing logic
-  - Create database that holds pokemon information x
-    - name, type, rarity, value
-  - Create database that holds player information x
-    - inventory, money, lakes
-  - Create database that holds store information x
-    - rods, lakes
-  - Functionality
-    - Click 'Fish!' to fish
-    - Space bar clicks to reel fish in
-    - Randomize pull from db depending on lake type
-    - Store functionality
-      - Buy better rods (increase odds of pulling rarer pokemon)
-      - Buy more lakes!
-    - Choose which lake you want to fish in + which rod you want to     use.
-    - Selling pokemon in your inventory to gain money
+Press the 'Fish!' button to fish for a Pokemon. 
+Click the indicated key to reel it in. 
+When you catch a Pokemon, it will go into your bucket. 
+You can sell your Pokemon to earn coins. 
+Use your coins to buy better rods or new lakes. 
+Better rods will pull better Pokemon and different lakes will hold different Pokemon. 
+If you're lucky you might even find a shiny!

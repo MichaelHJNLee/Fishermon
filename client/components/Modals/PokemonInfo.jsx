@@ -12,7 +12,7 @@ const Info = styled.div`
   top: 12%;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const PokemonName = styled.div`
@@ -22,7 +22,7 @@ const PokemonName = styled.div`
   width: auto;
   left: 8%;
   top: 10%;
-  font-size: 13px;
+  font-size: 10px;
 `;
 
 const Rarity = styled.div`
@@ -31,7 +31,8 @@ const Rarity = styled.div`
   height: 20px;
   width: auto;
   left: 62%;
-  top: 10%;
+  top: 80%;
+  font-size: 10px;
 `;
 
 const PokemonSprite = styled.img`
@@ -48,8 +49,8 @@ const SellQuery = styled.div`
   width: 120px;
   position: absolute;
   left: 8%;
-  top: 35%;
-  font-size: 13px;
+  top: 40%;
+  font-size: 8px;
 `;
 
 const Sell = styled.button`
@@ -59,6 +60,7 @@ const Sell = styled.button`
   position: absolute;
   left: 10%;
   top: 65%;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const XButton = styled.button`
@@ -67,21 +69,23 @@ const XButton = styled.button`
   width: auto;
   position: absolute;
   left: 92%;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 7px;
 `;
 const PokemonInfo = (props) => {
   let color = 'sprites';
-  let shiny = ' ';
+  let name = props.selectedPokemon.name[0].toUpperCase() + props.selectedPokemon.name.slice(1);
   if (props.displayShiny) {
     color = 'shiny';
-    shiny = ' Shiny '
+    name = 'Shiny ' + name;
   }
   return (
     <Info>
-      <PokemonName>#{props.selectedPokemon.id}:{shiny}{props.selectedPokemon.name[0].toUpperCase() + props.selectedPokemon.name.slice(1)}</PokemonName>
+      <PokemonName>#{props.selectedPokemon.id}:{name}</PokemonName>
       <XButton onClick={props.hide} >X</XButton>
-      <Rarity>{props.selectedPokemon.rarity[0].toUpperCase() + props.selectedPokemon.rarity.slice(1)}</Rarity>
       <PokemonSprite src={`/${color}/${props.selectedPokemon.id}.png`} style={{"height": "100px", "width": "100px"}} />
-      <SellQuery>Sell{shiny}{props.selectedPokemon.name[0].toUpperCase() + props.selectedPokemon.name.slice(1)} for {props.selectedPokemon.cost} coins?</SellQuery>
+      <Rarity>{props.selectedPokemon.rarity[0].toUpperCase() + props.selectedPokemon.rarity.slice(1)}</Rarity>
+      <SellQuery>Sell {name} for {props.selectedPokemon.cost} coins?</SellQuery>
       <Sell onClick={() => {props.sell(props.selectedPokemon)}}>Sell</Sell>
     </Info>
   )

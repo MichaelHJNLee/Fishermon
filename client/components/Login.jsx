@@ -4,7 +4,15 @@ import styled from 'styled-components';
 const StyledHeader = styled.h1`
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
+`;
+
+const Search = styled.input`
+  height: 20px;
+  width: 150px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const UserList = styled.div`
@@ -13,14 +21,15 @@ const UserList = styled.div`
   width: 400px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 15px;
 `;
 
 const User = styled.div`
-  border: 1px solid blue;
   font-smooth: never;
+  margin: 10px;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
   ${({ selected, id }) =>  selected === id && `
     background-color: #f5d3e9;
   `}
@@ -31,7 +40,8 @@ const LoginButton = styled.button`
   width: 100px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
+  margin: 5px;
 `;
 
 const SignUpButton = styled.button`
@@ -39,7 +49,21 @@ const SignUpButton = styled.button`
   width: 100px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 7px;
+  margin: 5px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-content: center;
+  width: auto;
+  align-self: center;
+`;
+
+const LoginContainer = styled.div`
+  display: flex;
+  flex-flow: column;
 `;
 
 class Login extends React.Component {
@@ -59,19 +83,24 @@ class Login extends React.Component {
 
   render() {
     return(
-      <div>
+      <LoginContainer>
         <center><StyledHeader>Fishermon</StyledHeader></center>
-        <center style={{'fontSmooth': 'never', 'WebkitFontSmoothing': 'none', 'fontFamily': "'pokemon-font', monospace"}}>Fishers:</center>
+        <br/>
+        <center style={{'fontSmooth': 'never', 'WebkitFontSmoothing': 'none', 'fontFamily': "'Press Start 2P', cursive"}}>Search Fishers: <Search onChange={(e) => this.props.search(e.target.value)}></Search></center>
+        <br/>
+        <center style={{'fontSmooth': 'never', 'WebkitFontSmoothing': 'none', 'fontFamily': "'Press Start 2P', cursive"}}>Fishers:</center>
         <br/>
         <center>
           <UserList>
             {this.props.users.map((user, index) => <User selected={this.state.selected} id={user.name} key={index} onClick={(e) => {this.selectUser(e.target.id)}}>{user.name}</User>)}
           </UserList>
           <br/>
-          <LoginButton onClick={() => {this.props.login(this.state.selected)}}>Log-In</LoginButton>
-          <SignUpButton onClick={this.props.signup}>New Fisher?</SignUpButton>
         </center>
-      </div>
+          <ButtonContainer>
+            <LoginButton onClick={() => {this.props.login(this.state.selected)}}>Log-In</LoginButton>
+            <SignUpButton onClick={this.props.signup}>New Fisher?</SignUpButton>
+          </ButtonContainer>
+      </LoginContainer>
     )
   }
 }

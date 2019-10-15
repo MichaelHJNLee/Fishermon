@@ -12,7 +12,7 @@ const Info = styled.div`
   top: 12%;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const ItemName = styled.div`
@@ -22,6 +22,7 @@ const ItemName = styled.div`
   width: auto;
   left: 37%;
   top: 12%;
+  font-size: 10px;
 `;
 
 const ItemSprite = styled.img`
@@ -38,8 +39,8 @@ const BuyQuery = styled.div`
   width: 110px;
   position: absolute;
   left: 10%;
-  top: 30%;
-  font-size: 13px;
+  top: 40%;
+  font-size: 8px;
 `;
 
 const Buy = styled.button`
@@ -49,6 +50,7 @@ const Buy = styled.button`
   position: absolute;
   left: 10%;
   top: 65%;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const XButton = styled.button`
@@ -57,6 +59,8 @@ const XButton = styled.button`
   width: auto;
   position: absolute;
   left: 0;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 7px;
 `;
 
 const StoreItemInfo = (props) => {

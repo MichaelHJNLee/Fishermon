@@ -4,11 +4,11 @@ import styled from 'styled-components';
 const FishingModal = styled.div`
   display: inline-block;
   width: 100%;
-  height: 233px;
+  height: 220px;
   z-index: 5;
   border: 1px solid black;
   position: absolute;
-  top: 75%;
+  top: 78%;
   left: 0;
   text-align: center;
   background: white;
@@ -24,36 +24,47 @@ const FishingCommand = styled.div`
   font-size: 100px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Fail = styled.div`
   display: inline-block;
   width: 1000px;
   height: 200px;
-  border: 1px solid blue;
   text-align: center;
   vertical-align: middle;
   line-height: 150px;
   font-size: 50px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 30px;
 `;
 
 const StartFishing = styled.div`
   position: absolute;
   width: 100px;
   height: 50px;
-  border: 1px solid green;
   top: 0%;
   left: 90%;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  color: green;
 `;
 
 const ExitFishing = styled.div`
   position: absolute;
-  width: 100px;
+  width: 150px;
   height: 50px;
-  border: 1px solid red;
-  top: 50%;
-  left: 90%;
+  top: 35%;
+  left: 88.25%;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  color: red;
 `;
 
 class Fishing extends React.Component {
@@ -81,11 +92,11 @@ class Fishing extends React.Component {
   }
 
   startFishing() {
-    const reels = Math.floor(Math.random() * 5) + 1;
+    const reels = Math.floor(Math.random() * 1) + 1;
     let reelCounter = 0;
     let readyCounter = 1;
-    const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-    // const keys = ['a']
+    //const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    const keys = ['a']
     this.targetKey = keys[Math.floor(Math.random() * keys.length)];
     let clicked = false;
     const handleReel = () => {

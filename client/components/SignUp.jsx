@@ -7,7 +7,7 @@ const StyledSignUp = styled.div`
   margin: 20px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Input = styled.input`
@@ -15,7 +15,7 @@ const Input = styled.input`
   width: 200px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Submit = styled.button`
@@ -23,7 +23,7 @@ const Submit = styled.button`
   width: 100px;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const SignUp = (props) => {
@@ -33,6 +33,7 @@ const SignUp = (props) => {
         <StyledSignUp>
           <br/>
           Enter your new fisher name here:
+          <br/>
           <br/>
           <Input id="new-fisher-input"></Input>
           <br/>

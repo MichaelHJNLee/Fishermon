@@ -12,7 +12,7 @@ const StyledInfo = styled.div`
   margin: 0;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const CurrentPlayer = styled.div`
@@ -26,6 +26,7 @@ const CurrentPlayer = styled.div`
   text-align: center;
   vertical-align: middle;
   line-height: 25px;
+  font-size: 10px;
 `;
 
 const LogOut = styled.div`
@@ -39,6 +40,7 @@ const LogOut = styled.div`
   text-align: center;
   vertical-align: middle;
   line-height: 25px;
+  font-size: 10px;
 `;
 
 const Bucket = styled.button`
@@ -52,7 +54,8 @@ const Bucket = styled.button`
   text-align: center;
   vertical-align: middle;
   line-height: 25px;
-  font-size: 20px;
+  font-size: 15px;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Rods = styled.select`
@@ -66,7 +69,8 @@ const Rods = styled.select`
   text-align: center;
   vertical-align: middle;
   line-height: 25px;
-  font-size: 15px;
+  font-size: 10px;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Lakes = styled.select`
@@ -80,7 +84,8 @@ const Lakes = styled.select`
   text-align: center;
   vertical-align: middle;
   line-height: 25px;
-  font-size: 15px;
+  font-size: 8px;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Fishermon = styled.button`
@@ -93,8 +98,9 @@ const Fishermon = styled.button`
   left: 44%;
   text-align: center;
   vertical-align: middle;
-  line-height: 25px;
+  line-height: 70px;
   font-size: 20px;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Money = styled.div`
@@ -108,6 +114,7 @@ const Money = styled.div`
   text-align: center;
   vertical-align: middle;
   line-height: 50px;
+  font-size: 10px;
 `;
 const Store = styled.button`
   display: inline-block;
@@ -120,7 +127,8 @@ const Store = styled.button`
   text-align: center;
   vertical-align: middle;
   line-height: 25px;
-  font-size: 20px;
+  font-size: 15px;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Help = styled.button`
@@ -135,6 +143,7 @@ const Help = styled.button`
   text-align: center;
   vertical-align: middle;
   line-height: 50px;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 class InfoBox extends React.Component {

@@ -12,14 +12,14 @@ const StyledHelp = styled.div`
   z-index: 10;
   font-smooth: never;
   -webkit-font-smoothing: none;
-  font-family: 'pokemon-font', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Welcome = styled.div`
   height: 100px;
   width: auto;
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
   margin: 0;
   position: absolute;
   left: 8%;
@@ -40,12 +40,13 @@ const Body = styled.div`
   width: 530px;
   left: 5px;
   top: 20%;
+  font-size: 15px;
 `;
 
 const Help = (props) => (
   <StyledHelp>
     <Exit onClick={props.help}>X</Exit>
-    <Welcome>Welcome to Fishermon!</Welcome>
+    <center><Welcome>Welcome to Fishermon!</Welcome></center>
     <Body>Fishermon is a game where you can fish for different Pokemon! Press the 'Fish!' button to fish for a Pokemon. Click the indicated key to reel it in. When you catch a Pokemon, it will go into your bucket. You can sell your Pokemon to earn coins. Use your coins to buy better rods or new lakes. Better rods will pull better Pokemon and different lakes will hold different Pokemon. If you're lucky you might even find a shiny!</Body>
   </StyledHelp>
 );
