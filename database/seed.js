@@ -15,9 +15,9 @@ const url = 'mongodb://localhost:27017/fishermon';
 // pokemon: Boolean
 const getPokemon = (callback) => {
   let firstGen = [];
-  let counter = 352;
+  let counter = 787;
   const apiCall = () => {  
-    if (counter <= 386) {
+    if (counter <= 807) {
       axios.get(`https://pokeapi.co/api/v2/pokemon/${counter}`)
         .then((data) => {
         const id = counter;

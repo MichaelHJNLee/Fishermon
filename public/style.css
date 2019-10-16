@@ -43,7 +43,7 @@ body {
 
 /* Style the active class (and buttons on mouse-over) */
 .pagination > li > a:hover {
-  background-color:  #23a6f7;
+  background-color:  #48f7f4;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {

@@ -97,6 +97,7 @@ class App extends React.Component {
               .then((data) => {
                 let avail = [];
                 let type = this.state.currentLake.split(' ')[0][0].toLowerCase() + this.state.currentLake.split(' ')[0].slice(1);
+
                 for (let i = 0; i < data.data.length; i++) {
                   if (data.data[i].type.includes(type)) {
                     avail.push(data.data[i]);
@@ -358,6 +359,7 @@ class App extends React.Component {
   handleLogin(user) {
     axios.get(`/player/${user}`)
       .then((data) => {
+        console.log(data.data[0].rarity, typeof data.data[0].rarity)
         this.setState({
           player: data.data[0].name,
           lakes: data.data[0].lakes,

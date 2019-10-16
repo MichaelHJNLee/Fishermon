@@ -8,7 +8,7 @@ const Info = styled.div`
   height: 150px;
   width: 280px;
   background: white;
-  left: 60%;
+  left: 59.9%;
   top: 12%;
   font-smooth: never;
   -webkit-font-smoothing: none;
@@ -20,7 +20,7 @@ const ItemName = styled.div`
   position: absolute;
   height: 20px;
   width: auto;
-  left: 37%;
+  left: 35%;
   top: 12%;
   font-size: 10px;
 `;
@@ -75,7 +75,7 @@ const StoreItemInfo = (props) => {
       <XButton onClick={props.hide}>X</XButton>
       <ItemName>{props.selected.name}</ItemName>
       <ItemSprite src={image} style={{"height": "50px", "width": "100px"}}/>
-      <BuyQuery>Buy {props.selected.name} for {props.selected.cost} coins?</BuyQuery>
+      <BuyQuery>Unlock {props.selected.name} for {props.selected.cost} coins?</BuyQuery>
       <Buy onClick={() => {props.buy(props.selected)}}>Buy</Buy>
     </Info>
   )
