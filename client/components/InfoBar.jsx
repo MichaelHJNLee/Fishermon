@@ -27,6 +27,7 @@ const CurrentPlayer = styled.div`
   vertical-align: middle;
   line-height: 25px;
   font-size: 10px;
+  border-radius: 5px;
 `;
 
 const LogOut = styled.div`
@@ -41,6 +42,7 @@ const LogOut = styled.div`
   vertical-align: middle;
   line-height: 25px;
   font-size: 10px;
+  border-radius: 5px;
 `;
 
 const Bucket = styled.button`
@@ -55,6 +57,48 @@ const Bucket = styled.button`
   vertical-align: middle;
   line-height: 25px;
   font-size: 15px;
+  font-family: 'Press Start 2P', cursive;
+  border-radius: 5px;
+`;
+
+const RegionsContainer = styled.div`
+  display: inline-block;
+  height: 70px;
+  width: 180px;
+  position: absolute;
+  top: 0;
+  left: 30%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px;
+  font-size: 9px;
+  font-family: 'Press Start 2P', cursive;
+`;
+
+const Regions = styled.div`
+  display: flex;
+  height: 45px;
+  font-size: 7px;
+  font-family: 'Press Start 2P', cursive;
+  flex-flow: row wrap;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 20px;
+`;
+
+const Fishermon = styled.button`
+  display: inline-block;
+  height: 70px;
+  width: 170px;
+  border: 1px solid black;
+  position: absolute;
+  top: 0.6%;
+  left: 44%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 70px;
+  border-radius: 5px;
+  font-size: 20px;
   font-family: 'Press Start 2P', cursive;
 `;
 
@@ -88,21 +132,6 @@ const Lakes = styled.select`
   font-family: 'Press Start 2P', cursive;
 `;
 
-const Fishermon = styled.button`
-  display: inline-block;
-  height: 70px;
-  width: 170px;
-  border: 1px solid black;
-  position: absolute;
-  top: 0.6%;
-  left: 44%;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 70px;
-  font-size: 20px;
-  font-family: 'Press Start 2P', cursive;
-`;
-
 const Money = styled.div`
   display: inline-block;
   height: 50px;
@@ -114,6 +143,7 @@ const Money = styled.div`
   text-align: center;
   vertical-align: middle;
   line-height: 50px;
+  border-radius: 5px;
   font-size: 10px;
 `;
 const Store = styled.button`
@@ -128,6 +158,7 @@ const Store = styled.button`
   vertical-align: middle;
   line-height: 25px;
   font-size: 15px;
+  border-radius: 5px;
   font-family: 'Press Start 2P', cursive;
 `;
 
@@ -154,11 +185,35 @@ class InfoBox extends React.Component {
   }
   
   render() {
+    let gens = [];
+    for (let i = 1; i < this.props.gens.length; i++) {
+      gens.push(this.props.gens[i]);
+    }
+    gens.sort();
+    for (let j = 0; j < gens.length; j++) {
+      if (gens[j] === '2') {
+        gens[j] = 'Johto';
+      } else if (gens[j] === '3') {
+        gens[j] = "Hoenn";
+      } else if (gens[j] === '4') {
+        gens[j] = "Sinnoh";
+      } else if (gens[j] === '5') {
+        gens[j] = "Unova";
+      } else if (gens[j] === '6') {
+        gens[j] = "Kalos";
+      } else if (gens[j] === '7') {
+        gens[j] = "Alola";
+      }
+    }
     return(
       <StyledInfo>
         <CurrentPlayer>{this.props.player}</CurrentPlayer>
         <LogOut onClick={this.props.logout}>Log Out</LogOut>
         <Bucket onClick={this.props.displayBucket}>Bucket</Bucket>
+        <RegionsContainer>
+          Unlocked Regions
+          <Regions>Kanto{gens.map((gen) => {return ` ${gen}`})}</Regions>
+        </RegionsContainer>
         <Rods onChange={(e) => {this.props.changeRod(e.target.value)}}>Rods
           {this.props.rods.map((rod, index) => <option key={index}>{rod}</option>)}
         </Rods>

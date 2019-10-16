@@ -66,6 +66,12 @@ app.put('/player/buy/:rodLake/:id', (req, res) => {
   })
 })
 
+app.put('/player/generation/:id', (req, res) => {
+  const id = req.params.id;
+  pokemon.buyGen(id, req.body.gens, req.body.cost, (data) => {
+    res.send(data)
+  })
+})
 
 
 

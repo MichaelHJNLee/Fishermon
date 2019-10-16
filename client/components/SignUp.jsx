@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyledSignUp = styled.div`
@@ -27,6 +27,17 @@ const Submit = styled.button`
 `;
 
 const SignUp = (props) => {
+  useEffect(() => {
+    const enter = (e) => {
+      if (e.key === 'Enter') {
+        props.submit(document.getElementById("new-fisher-input").value);
+      }
+    }
+    window.addEventListener('keydown', enter);
+    return function cleanup() {
+      window.removeEventListener('keydown', enter)
+    }
+  });
   return (
     <div>
       <center>

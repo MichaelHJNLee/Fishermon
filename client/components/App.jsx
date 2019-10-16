@@ -39,6 +39,7 @@ class App extends React.Component {
       lakes: [],
       rods: [],
       allPokemon: [],
+      gens: [],
       success: false,
       nextPokemon: null,
       bucketDisplay: false,
@@ -93,47 +94,6 @@ class App extends React.Component {
               users: data.data,
               usersDisplayed: data.data
             })
-            axios.get(`/pokemon`)
-              .then((data) => {
-                let avail = [];
-                let type = this.state.currentLake.split(' ')[0][0].toLowerCase() + this.state.currentLake.split(' ')[0].slice(1);
-
-                for (let i = 0; i < data.data.length; i++) {
-                  if (data.data[i].type.includes(type)) {
-                    avail.push(data.data[i]);
-                  }
-                }
-                let random = Math.floor(Math.random() * 100) + 1;
-                let rarity;
-                if (random >= 1 && random <= this.state.common) {
-                  rarity = 'common';
-                } else if (random > this.state.common && random <= this.state.uncommon) {
-                  rarity = 'uncommon';
-                } else if (random > this.state.uncommon && random <= this.state.rare) {
-                  rarity = 'rare';
-                } else if (random > this.state.rare && random <= this.state.superRare) {
-                  rarity = 'super rare';
-                } else {
-                  rarity = 'ultra rare';
-                }
-                let rare = [];
-                for (let j = 0; j < avail.length; j++) {
-                  if (avail[j].rarity === rarity) {
-                    rare.push(avail[j]);
-                  }
-                }
-                if (rare.length < 1) {
-                  rare.push(avail[Math.floor(Math.random() * avail.length)]);
-                }
-                let pokemon = rare[Math.floor(Math.random() * rare.length)];
-                let shiny = Math.floor(Math.random() * 500) + 1;
-                this.setState({
-                  allPokemon: data.data,
-                  available: avail,
-                  nextPokemon: pokemon,
-                  shiny: shiny,
-                })
-              })
           })
       })
   }
@@ -283,7 +243,8 @@ class App extends React.Component {
   }
 
   handleBuy(item) {
-    if (this.state.rods.includes(item.name) || this.state.lakes.includes(item.name)) {
+    if (this.state.rods.includes(item.name) || this.state.lakes.includes(item.name) || this.state.gens.includes(item.rarity)) {
+      console.log(item)
       alert("You already have this item!");
       return;
     }
@@ -302,13 +263,24 @@ class App extends React.Component {
             storeItemDisplay: false
           })
         })
-    } else {
+    } else if (item.type[0] === 'lake') {
       let lakes = this.state.lakes;
       lakes.push(item.name);
       axios.put(`/player/buy/lakes/${this.state.player}`, {'array': lakes, 'cost': this.state.money - item.cost})
         .then((res) => {
           this.setState({
             lakes: res.data.lakes,
+            money: res.data.money,
+            storeItemDisplay: false
+          })
+        })
+    } else {
+      let gens = this.state.gens;
+      gens += item.rarity;
+      axios.put(`/player/generation/${this.state.player}`, {'gens': gens, 'cost': this.state.money - item.cost})
+        .then((res) => {
+          this.setState({
+            gens: res.data.rarity,
             money: res.data.money,
             storeItemDisplay: false
           })
@@ -359,19 +331,64 @@ class App extends React.Component {
   handleLogin(user) {
     axios.get(`/player/${user}`)
       .then((data) => {
-        console.log(data.data[0].rarity, typeof data.data[0].rarity)
         this.setState({
           player: data.data[0].name,
           lakes: data.data[0].lakes,
           rods: data.data[0].rods,
           money: data.data[0].money,
           bucket: data.data[0].bucket,
+          gens: data.data[0].rarity,
           currentLake: 'Water Well',
           rod: 'Old Rod',
           login: true,
           signup: false,
         })
+        let generations = data.data[0].rarity;
         this.handleLakeChange('Water Well');
+        axios.get(`/pokemon`)
+        .then((data) => {
+          let avail = [];
+          let type = this.state.currentLake.split(' ')[0][0].toLowerCase() + this.state.currentLake.split(' ')[0].slice(1);
+          let check = {};
+          for (let i = 0; i < generations.length; i++) {
+            check[generations[i]] = 1;
+          }
+          for (let i = 0; i < data.data.length; i++) {
+            if (data.data[i].type.includes(type) && check[data.data[i].money]) {
+              avail.push(data.data[i]);
+            }
+          }
+          let random = Math.floor(Math.random() * 100) + 1;
+          let rarity;
+          if (random >= 1 && random <= this.state.common) {
+            rarity = 'common';
+          } else if (random > this.state.common && random <= this.state.uncommon) {
+            rarity = 'uncommon';
+          } else if (random > this.state.uncommon && random <= this.state.rare) {
+            rarity = 'rare';
+          } else if (random > this.state.rare && random <= this.state.superRare) {
+            rarity = 'super rare';
+          } else {
+            rarity = 'ultra rare';
+          }
+          let rare = [];
+          for (let j = 0; j < avail.length; j++) {
+            if (avail[j].rarity === rarity) {
+              rare.push(avail[j]);
+            }
+          }
+          if (rare.length < 1) {
+            rare.push(avail[Math.floor(Math.random() * avail.length)]);
+          }
+          let pokemon = rare[Math.floor(Math.random() * rare.length)];
+          let shiny = Math.floor(Math.random() * 500) + 1;
+          this.setState({
+            allPokemon: data.data,
+            available: avail,
+            nextPokemon: pokemon,
+            shiny: shiny,
+          })
+        })
       }
     );
   };
@@ -480,7 +497,7 @@ class App extends React.Component {
         {this.state.signup && <SignUp submit={this.handleNewPlayer} />}
         {this.state.login && 
         <div>
-        <InfoBar changeRod={this.handleRodChange} changeLake={this.handleLakeChange} rods={this.state.rods} lakes={this.state.lakes} fishingOn={this.fishingOn} player={this.state.player} money={this.state.money} displayBucket={this.displayBucket} displayStore={this.displayStore} logout={this.handleLogout} help={this.toggleHelp} />
+        <InfoBar gens={this.state.gens} changeRod={this.handleRodChange} changeLake={this.handleLakeChange} rods={this.state.rods} lakes={this.state.lakes} fishingOn={this.fishingOn} player={this.state.player} money={this.state.money} displayBucket={this.displayBucket} displayStore={this.displayStore} logout={this.handleLogout} help={this.toggleHelp} />
         {this.state.bucketDisplay && <Bucket shiny={this.state.shiny} bucket={this.state.bucket} all={this.state.allPokemon} displayPokemonInfo={this.displayPokemonInfo}/>}
         {this.state.help && <Help help={this.toggleHelp}/>}
         {this.state.storeItemDisplay && <StoreItemInfo hide={this.hideStoreItemInfo} selected={this.state.selectedItem} buy={this.handleBuy} />}

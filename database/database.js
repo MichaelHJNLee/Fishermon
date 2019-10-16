@@ -87,6 +87,13 @@ const buyItem = (player, rodLake, array, money, callback) => {
   }
 }
 
+const buyGen = (player, gens, money, callback) => {
+  Pokemon.findOneAndUpdate({"name": player, "player": true}, {"rarity": gens, "money": money}, {new: true}, (err, data) => {
+    if (err) throw err;
+    callback(data);
+  })
+}
+
 module.exports = {
   getPlayer,
   getAllPlayers,
@@ -96,4 +103,5 @@ module.exports = {
   addToBucket,
   sellFromBucket,
   buyItem,
+  buyGen,
 }

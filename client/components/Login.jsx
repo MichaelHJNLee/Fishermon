@@ -16,13 +16,13 @@ const Search = styled.input`
 `;
 
 const UserList = styled.div`
-  border: 1px solid black;
-  height: auto;
+  height: 410px;
   width: 400px;
   font-smooth: never;
   -webkit-font-smoothing: none;
   font-family: 'Press Start 2P', cursive;
   font-size: 15px;
+  overflow: scroll;
 `;
 
 const User = styled.div`
