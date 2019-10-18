@@ -47,7 +47,7 @@ const Help = (props) => (
   <StyledHelp>
     <Exit onClick={props.help}>X</Exit>
     <center><Welcome>Welcome to Fishermon!</Welcome></center>
-    <Body>Fishermon is a game where you can fish for different Pokemon! Press the 'Fish!' button to fish for a Pokemon. Click the indicated key to reel it in. When you catch a Pokemon, it will go into your bucket. You can sell your Pokemon to earn coins. Use your coins to buy better rods or new lakes. Better rods will pull better Pokemon and different lakes will hold different Pokemon. If you're lucky you might even find a shiny!</Body>
+    <Body>Fishermon is a game where you can fish for different Pokemon! Press the 'Fish!' button to fish for a Pokemon. Click the indicated key to reel it in. When you catch a Pokemon, it will go into your bucket. You can sell your Pokemon to earn coins. Use your coins to buy better rods, new lakes, or other regions. Better rods will pull better Pokemon and different lakes will hold different types of Pokemon. If you're lucky you might even find a shiny!</Body>
   </StyledHelp>
 );
 
