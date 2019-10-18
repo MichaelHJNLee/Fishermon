@@ -1,5 +1,5 @@
 {
-  "name": "Fishermon",
+  "name": "fishermon",
   "version": "1.1.0",
   "description": "Fishermon Game",
   "author": "Fishermon Inc.",
@@ -8,8 +8,9 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "nodemon server/server.js",
-    "build": "webpack -d --watch"
+    "start": "node server/server.js",
+    "build": "webpack -d --watch",
+    "start:dev": "nodemon server/server.js"
   },
   "dependencies": {
     "aws-sdk": "^2.514.0",
