@@ -51,7 +51,7 @@ const newPlayer = (player, callback) => {
     if (data.length > 0) {
       callback('exists');
     } else {
-      Pokemon.findOneAndUpdate({"name": player, "player": true}, {id: 0, name: player, type: [], cost: 0, rarity: 0, bucket: [], rods: ['Old Rod'], lakes: ['Water Well'], player: true, money: 0, store: false}, {upsert: true}, (err, data) => {
+      Pokemon.findOneAndUpdate({"name": player, "player": true}, {id: 0, name: player, type: [], cost: 0, rarity: 0, bucket: [], rods: ['Old Rod'], lakes: ['Water Well'], player: true, money: 1000, store: false}, {upsert: true}, (err, data) => {
         if (err) throw err;
         callback(data);
       })

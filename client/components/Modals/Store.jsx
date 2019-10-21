@@ -31,7 +31,7 @@ const Store = (props) => {
             return (<StoreItem value={item.name} key={index} onClick={() => {props.display(item)}}><img src={`types/ultrarod.png`} style={{"height": "100%", "width": "100%"}} /></StoreItem>)
           }
         } else if (item.type[0] === 'region') {
-          return (<StoreItem value={item.name} key={index} onClick={() => {props.display(item)}}><img src={`types/${item.name.split(' ')[0]}.png`} style={{"height": "100%", "width": "100%"}} /></StoreItem>)
+          return (<StoreItem value={item.name} key={index} onClick={() => {props.display(item)}}><img src={`types/${item.name.split(' ')[0][0].toLowerCase() + item.name.split(' ')[0].slice(1)}.png`} style={{"height": "100%", "width": "100%"}} /></StoreItem>)
         } else {
           return (<StoreItem value={item.name} key={index} onClick={() => {props.display(item)}}><img src={`types/${item.name.split(' ')[0][0].toLowerCase() + item.name.split(' ')[0].slice(1)}.png`} style={{"height": "100%", "width": "100%"}} /></StoreItem>)
         }

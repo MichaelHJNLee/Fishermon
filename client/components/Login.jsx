@@ -37,7 +37,7 @@ const User = styled.div`
 
 const LoginButton = styled.button`
   height: 30px;
-  width: 100px;
+  width: auto;
   font-smooth: never;
   -webkit-font-smoothing: none;
   font-family: 'Press Start 2P', cursive;
@@ -97,7 +97,7 @@ class Login extends React.Component {
           <br/>
         </center>
           <ButtonContainer>
-            <LoginButton onClick={() => {this.props.login(this.state.selected)}}>Log-In</LoginButton>
+            <LoginButton onClick={() => {this.props.login(this.state.selected)}}>{this.state.selected !== '' && `Log-In as ${this.state.selected}`}{this.state.selected === '' && 'Log-In'}</LoginButton>
             <SignUpButton onClick={this.props.signup}>New Fisher?</SignUpButton>
           </ButtonContainer>
       </LoginContainer>

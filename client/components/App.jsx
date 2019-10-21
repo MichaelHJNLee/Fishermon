@@ -401,6 +401,7 @@ class App extends React.Component {
       pokemonDisplay: false,
       success: false,
       storeItemDisplay: false,
+      fishing: false,
     })
   }
 

@@ -18,8 +18,7 @@ const StyledInfo = styled.div`
 const CurrentPlayer = styled.div`
   display: inline-block;
   height: 25px;
-  width: 100px;
-  border: 1px solid black;
+  width: auto;
   position: absolute;
   top: 1.75%;
   left: 3%;
@@ -135,7 +134,7 @@ const Lakes = styled.select`
 const Money = styled.div`
   display: inline-block;
   height: 50px;
-  width: 110px;
+  width: auto;
   border: 1px solid black;
   position: absolute;
   top: 1.75%;
