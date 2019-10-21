@@ -13,3 +13,4 @@ You can sell your Pokémon to earn coins.
 Use your coins to unlock better rods, new lakes, or other regions. 
 Better rods will pull better Pokémon and different lakes will hold different types of Pokémon.
 If you're lucky you might even find a shiny!
+ec2-54-67-107-35.us-west-1.compute.amazonaws.com:3000
